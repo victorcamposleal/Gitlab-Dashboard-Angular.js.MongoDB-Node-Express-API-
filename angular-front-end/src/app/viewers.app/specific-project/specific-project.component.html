@@ -1,0 +1,56 @@
+<div *ngIf="message==='200 OK';then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <div *ngIf="chosenProjectName" class="first-container">
+        <div class="title-container">
+            <h1 class="main-title">{{chosenProjectName}}</h1>
+        </div>
+        <div class="main-container">
+            <div class="first-chart-container">
+                <div class="stats2">
+                    <div class="text2">
+                        <h3>Issues totales creados: {{issuesStatusPerProject.all}}</h3>
+                        <h3>Issues que actualmente se encuentran abiertos: <span class="open">
+                                {{issuesStatusPerProject.opened}}</span></h3>
+                        <h3>Issues que han sido cerrados: <span class="closed">{{issuesStatusPerProject.closed}}</span>
+                        </h3>
+                    </div>
+                    <div class="pie-container">
+                        <h2 class="legend">Proporción issues abiertos-cerrados</h2>
+                        <chart [type]="chart.type" [data]="chart.data" [options]="chart.options" class="pieChart">
+                        </chart>
+                    </div>
+                </div>
+            </div>
+
+            <div class="second-chart-container">
+                <div class="stats2">
+                    <div class="text2">
+                        <h3 class="barData"> Numero de commits por desarrollador: </h3>
+                        <h3 *ngFor="let value of mostCollaborativePerProject, index as i" class="barData">
+                            {{value.name}}: <span class="data{{i}}">{{value.commits}}</span></h3>
+                    </div>
+                    <div class="chart-container">
+                        <chart [type]="chart2.type" [data]="chart2.data" [options]="chart2.options" class="barChart">
+                        </chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #elseBlock>
+    <div class="first-container">
+        <div class="error-message">
+            <div class="error-text">
+                <h1 class="error">Error 404: No se encuentra el número de proyecto seleccionado.</h1>
+            </div>
+            <div>
+                <div class="button-container">
+                    <p (click)='goToPreferences()' class="redirect-button">Ir a las preferencias</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ng-template>

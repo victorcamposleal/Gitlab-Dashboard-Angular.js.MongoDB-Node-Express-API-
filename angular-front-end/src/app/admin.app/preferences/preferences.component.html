@@ -1,0 +1,136 @@
+<div class="first-container">
+    <div class="text-container">
+        <div class="title-container">
+            <h1 class="main-title">Preferencias de usuario</h1>
+        </div>
+        <div>
+            <div class="subtitle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon">
+                    <path
+                        d="M16.562 7l4.694 5-4.694 5h-11.919l4.726-5-4.726-5h11.919zm.866-2h-17.428l6.616 7-6.616 7h17.428l6.572-7-6.572-7z"
+                        fill="white" /></svg>
+                <h2>1. Modificación del grupo de GitLab</h2>
+            </div>
+            <h3>El grupo de proyectos actualmente seleccionado es aquel con ID {{selectedGroup}}</h3>
+            <p>¿Desea elegir otro grupo? Para eso, ingrese el ID del nuevo grupo y guarde su preferencia: <input
+                    type="text" [(ngModel)]="selectedGroupID" placeholder="ID del grupo" class="data-input" /></p>
+            <div class="mod-container">
+                <p class="save-button" (click)='saveGroupIDAsync()'>Guardar nuevo grupo</p>
+                <p class="message">{{groupSaved}}</p>
+            </div>
+        </div>
+        <div>
+            <div class="subtitle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon">
+                    <path
+                        d="M16.562 7l4.694 5-4.694 5h-11.919l4.726-5-4.726-5h11.919zm.866-2h-17.428l6.616 7-6.616 7h17.428l6.572-7-6.572-7z"
+                        fill="white" /></svg>
+                <h2>2.1. Elección de visores de información general</h2>
+            </div>
+            <h3>
+                Seleccione aquellos datos estadísticos que desee observar posteriormente en los visores.
+            </h3>
+            <p>Recuerde que se toman como referencia los últimos 10 proyectos del grupo que han sufrido modificaciones.
+            </p>
+            <div class="checkbox-container">
+                <p><label><input type="checkbox" (change)="changeValue(preferences.mostCommitsUser)"
+                            [(ngModel)]="preferences.mostCommitsUser" />&nbsp; Desarrolladores que han realizado una
+                        mayor
+                        cantidad de commits entre todos los proyectos.</label>
+                </p>
+                <p><label><input type="checkbox" (change)="changeValue(preferences.mostCollaborativeProjects)"
+                            [(ngModel)]="preferences.mostCollaborativeProjects" />&nbsp; Proyectos más colaborativos
+                        (aquellos en los que
+                        ha hecho modificaciones una cantidad mayor de desarrolladores).</label></p>
+                <p><label><input type="checkbox" (change)="changeValue(preferences.mostCommitsLastWeek)"
+                            [(ngModel)]="preferences.mostCommitsLastWeek" />&nbsp; Proyectos en los cuales se ha
+                        realizado
+                        una mayor cantidad de commits
+                        durante la última semana.</label></p>
+                <p><label><input type="checkbox" (change)="changeValue(preferences.totalIssues)"
+                            [(ngModel)]="preferences.totalIssues" />&nbsp; Cantidad total de issues creados entre todos
+                        los
+                        proyectos y estado de los mismos.</label></p>
+                <p><label><input type="checkbox" (change)="changeValue(preferences.mostIssuesCreated)"
+                            [(ngModel)]="preferences.mostIssuesCreated" />&nbsp; Proyectos en los cuales se ha creado
+                        una
+                        mayor cantidad de issues.</label></p>
+                <p><label><input type="checkbox" (change)="changeValue(preferences.mostIssuesOpen)"
+                            [(ngModel)]="preferences.mostIssuesOpen" />&nbsp; Proyectos en los cuales existe una mayor
+                        cantidad de issues todavía
+                        abiertos.</label></p>
+                <p><label><input type="checkbox" (change)="changeValue(preferences.mostIssuesClosed)"
+                            [(ngModel)]="preferences.mostIssuesClosed" />&nbsp; Proyectos en los cuales se ha cerrado
+                        una
+                        mayor cantidad de issues.</label></p>
+                <p><label><input type="checkbox" (change)="changeValue(preferences.bestClosingRatio)"
+                            [(ngModel)]="preferences.bestClosingRatio" />&nbsp; Proyectos que poseen la mejor proporción
+                        entre issues cerrados e issues creados.</label></p>
+            </div>
+        </div>
+        <div>
+            <div class="subtitle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon">
+                    <path
+                        d="M16.562 7l4.694 5-4.694 5h-11.919l4.726-5-4.726-5h11.919zm.866-2h-17.428l6.616 7-6.616 7h17.428l6.572-7-6.572-7z"
+                        fill="white" /></svg>
+                <h2>2.2. Indicadores de un proyecto concreto</h2>
+            </div>
+            <p>Si lo desea, puede recibir datos sobre un proyecto específico. Para ello, elija entre los más recientes (si no los ve a continuación, es posible que el ID de grupo o el token guardados no sean correctos) o
+                bien inserte su ID.</p>
+            <div class="specific-ID-options">
+                <div class="options-container">
+                    <div class="recent-projects-options">
+                        <p *ngFor="let project of ProjectId" class="radio-option">
+                            <input type="radio" name="selectedProj" [id]="project.name" [value]="project.id"
+                                (change)="changeProject(project.id)">
+                            <label [for]="project.name" class="radio.option">{{project.name}}</label>
+                        </p>
+                    </div>
+                    <p class="other-options">
+                        <input type="radio" name="selectedProj" id="other" [value]="selectedProjID.value"
+                            (change)="changeProject(selectedProjID.value)">
+                        <label for="other">Otro: <input type="text" placeholder="ID del proyecto"
+                                [(ngModel)]="selectedProjID.value" class="data-input" /></label>
+                    </p>
+                    <p class="other-options">
+                        <input type="radio" name="selectedProj" id="none" value="" (change)="removeProject('')">
+                        <label for="none">No quiero ver información sobre ningún proyecto en particular</label>
+                    </p>
+                </div>
+            </div>
+            <div class="mod-container">
+                <p class="save-button" (click)='savePreferencesAsync()'>Guardar preferencias de visores</p>
+                <p class="message">{{viewersSaved}}</p>
+            </div>
+        </div>
+        <div>
+            <div class="subtitle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="icon">
+                    <path
+                        d="M16.562 7l4.694 5-4.694 5h-11.919l4.726-5-4.726-5h11.919zm.866-2h-17.428l6.616 7-6.616 7h17.428l6.572-7-6.572-7z"
+                        fill="white" /></svg>
+                <h2>3. Modificación del token de acceso a la información de GitLab</h2>
+            </div>
+            <h3>¿Desea registrar un nuevo <span class="italic">personal access token</span>
+                para acceder a la API de GitLab?</h3>
+            <p>Recuerde que expiran cada cierto tiempo, o que puede necesitar un token determinado para acceder a
+                ciertos
+                grupos o proyectos.</p>
+            <div>
+                <p><input type="text" [(ngModel)]="model.token" placeholder="Nuevo personal access token"
+                        class="data-input" />
+                </p>
+            </div>
+            <div class="mod-container">
+                <p class="save-button" (click)='saveTokenAsync()'>Guardar nueva clave</p>
+                <p class="message">{{tokenSaved}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-container">
+        <p class="save-button" (click)='onNavigate()'>Ir a los visores</p>
+    </div>
+    <div class="bottom-container">
+        <p class="save-button" (click)='logOutAsync()'>Cerrar sesión</p>
+    </div>

@@ -1,0 +1,56 @@
+main{
+    text-align: center;
+    position: relative;
+    margin: 0px;
+}
+
+.viewer {
+    display: block;
+}
+
+.first-container {
+    background-image: url('../../assets/fondo.jpg');
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    max-height: 100vh;
+    font-family: 'Asap', sans-serif;
+    overflow: hidden;
+}
+
+.error-text {
+    background-color: firebrick;
+    padding: 5px 15px;
+    border-radius: 5px; 
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    align-items: center;
+}
+
+.button-container {
+    align-self: center;
+    margin-right: 20px;
+}
+
+.redirect-button{
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.redirect-button:hover {
+    background-color: blanchedalmond;
+}
+
+.redirect-button:active {
+    background-color: goldenrod;
+}

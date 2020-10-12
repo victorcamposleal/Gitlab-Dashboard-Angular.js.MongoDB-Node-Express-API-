@@ -1,0 +1,44 @@
+.stats {
+    display: flex;
+}
+
+.text {
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.data-titles {
+    text-align: start;
+    margin-left: 10%;
+}
+
+.data {
+    text-align: start;
+    margin-left: 10%;
+}
+
+.closed {
+    background-color: rgb(133, 220, 89);
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+
+.open {
+    background-color: rgb(231, 75, 77);
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+
+.pie-container {
+    width: 50%;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart {
+    width: 700px;
+}

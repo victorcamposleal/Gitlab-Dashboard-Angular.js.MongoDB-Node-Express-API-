@@ -1,0 +1,87 @@
+<div *ngIf="error!==undefined; then errorBlock else viewersBlock"></div>
+
+<ng-template #errorBlock>
+    <main class="first-container">
+        <div class="error-message">
+            <div class="error-text">
+                <h2 class="error">Error 504: El servidor se encuentra desconectado.</h2>
+                <h2 class="error">Luego de reconectarlo, intente refrescar la página.</h2>
+            </div>            
+        </div>
+    </main>
+</ng-template>
+
+<ng-template #viewersBlock>
+    <div *ngIf="message==='200 OK'|| message==='404 Project Not Found' ;then thenBlock else elseBlock">
+    </div>
+    <ng-template #thenBlock>
+        <main class="first-container">
+            <app-most-commits-user class="viewer" @stepAnimation *ngIf="viewerType==='mostCommitsUser'"
+                [backgroundColors]="backgroundColors" [borderColors]="borderColors">
+            </app-most-commits-user>
+            <app-most-collaborative-projects class="viewer" @stepAnimation
+                *ngIf="viewerType==='mostCollaborativeProjects'" [backgroundColors]="backgroundColors"
+                [borderColors]="borderColors">
+            </app-most-collaborative-projects>
+            <app-most-commits-last-week class="viewer" @stepAnimation *ngIf="viewerType==='mostCommitsLastWeek'"
+                [backgroundColors]="backgroundColors" [borderColors]="borderColors">
+            </app-most-commits-last-week>
+            <app-total-issues class="viewer" @stepAnimation *ngIf="viewerType==='totalIssues'"></app-total-issues>
+            <app-most-issues class="viewer" @stepAnimation *ngIf="viewerType==='mostIssuesCreated'"
+                [backgroundColors]="backgroundColors" [borderColors]="borderColors"></app-most-issues>
+            <app-most-issues-closed class="viewer" @stepAnimation *ngIf="viewerType==='mostIssuesClosed'"
+                [backgroundColors]="backgroundColors" [borderColors]="borderColors">
+            </app-most-issues-closed>
+            <app-most-issues-opened class="viewer" @stepAnimation *ngIf="viewerType==='mostIssuesOpen'"
+                [backgroundColors]="backgroundColors" [borderColors]="borderColors">
+            </app-most-issues-opened>
+            <app-best-closing-ratio class="viewer" @stepAnimation *ngIf="viewerType==='bestClosingRatio'"
+                [backgroundColors]="backgroundColors" [borderColors]="borderColors">
+            </app-best-closing-ratio>
+            <app-specific-project class="viewer" @stepAnimation *ngIf="viewerType==='chosenProject'"
+                [backgroundColors]="backgroundColors" [borderColors]="borderColors"></app-specific-project>
+            <div *ngIf="Preferences.length===0">
+                <div class="error-message">
+                    <div class="error-text">
+                        <h2 class="error">Error 404: No ha seleccionado ningún visor en el apartado de opciones.</h2>
+                        <h2 class="error">Intente modificarlo en la zona de preferencias.</h2>
+                    </div>
+                    <div class="button-container">
+                        <p (click)='goToPreferences()' class="redirect-button">Ir a las preferencias</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </ng-template>
+
+    <ng-template #elseBlock>
+        <main class="first-container">
+            <div *ngIf="message==='401 Unauthorized';then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <div class="error-message">
+                    <div class="error-text">
+                        <h2 class="error">Error 401: Al parecer, el token con el que se realizan las peticiones no es
+                            válido.</h2>
+                        <h2 class="error">Intente modificarlo en la zona de preferencias.</h2>
+                    </div>
+                    <div>
+                        <div class="button-container">
+                            <p (click)='goToPreferences()' class="redirect-button">Ir a preferencias</p>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #elseBlock>
+                <div class="error-message">
+                    <div class="error-text">
+                        <h2 class="error">Error 404: No se encuentra el número de grupo seleccionado.</h2>
+                        <h2 class="error">Intente modificarlo en la zona de preferencias.</h2>
+                    </div>
+                    <div class="button-container">
+                        <p (click)='goToPreferences()' class="redirect-button">Ir a las preferencias</p>
+                    </div>
+                </div>
+            </ng-template>
+        </main>
+    </ng-template>
+</ng-template>

@@ -1,0 +1,65 @@
+.first-container {
+    background-image: url('../../../assets/fondo.jpg');
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Asap', sans-serif;    
+}
+
+.logo-container {
+    margin-top: 120px;
+    margin-bottom: 50px;
+}
+
+.logo-irontec {
+   width: 300px;
+}
+
+.title {
+    text-align: center;
+}
+
+.text-container {
+    background-image: url('../../../assets/fondo-caja.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 50px;
+    padding: 20px 40px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.input-login {
+    width: 240px;
+    border-radius: 5px;
+    background-color: lightgoldenrodyellow;
+    padding: 10px;
+    font-size: large;
+}
+
+.login-button {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.login-button:hover {
+    background-color: blanchedalmond;
+}
+
+.login-button:active {
+    background-color: goldenrod;
+}
+
+.message-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

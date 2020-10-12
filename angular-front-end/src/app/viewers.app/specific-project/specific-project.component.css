@@ -1,0 +1,93 @@
+.main-container {
+    display: flex;
+    margin-top: 0px;
+}
+
+.closed {
+    background-color: rgb(133, 220, 89);
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+
+.open {
+    background-color: rgb(231, 75, 77);
+    border-radius: 3px;
+    padding: 2px 5px;
+}
+
+.stats2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pie-container {
+    width: 50%;
+    margin-top: 10px;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.legend {
+    width: max-content;
+}
+
+.text2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10%;
+}
+
+.pieChart {
+    width: 500px;
+}
+
+.barChart {
+    width: 450px;
+}
+
+.chart-container {
+    margin-top: 20px;
+}
+
+.barData {
+    line-height: 5px;
+}
+
+.error-text {
+    background-color: firebrick;
+    padding: 5px 15px;
+    border-radius: 5px; 
+}
+
+.error-message {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    align-items: center;
+}
+
+.button-container {
+    align-self: center;
+    margin-right: 20px;
+}
+
+.redirect-button{
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.redirect-button:hover {
+    background-color: blanchedalmond;
+}
+
+.redirect-button:active {
+    background-color: goldenrod;
+}

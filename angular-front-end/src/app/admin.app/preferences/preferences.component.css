@@ -1,0 +1,115 @@
+.first-container {
+    background-image: url('../../../assets/fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Asap', sans-serif;    
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+}
+
+.main-title{
+    margin-top: 50px;
+    background-color: firebrick;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.subtitle {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.icon {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.text-container {
+    display: block;
+    width: 70%;
+}
+
+.mod-container {
+    display: flex;
+    align-items: center;
+}
+
+.message {
+    margin-left: 10px;
+}
+
+.checkbox-container {
+    margin-top: 30px;
+}
+
+.specific-ID-options {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recent-projects-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.other-options {
+    align-self: start;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.radio-option {
+    width: 30%;
+}
+
+.data-input{
+    width: 300px;
+    border-radius: 5px;
+    background-color: lightgoldenrodyellow;
+    padding: 5px;
+    font-size: medium;
+}
+
+.save-button{
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.save-button:hover {
+    background-color: blanchedalmond;
+}
+
+.save-button:active {
+    background-color: goldenrod;
+}
+
+.bottom-container{
+    align-self: center;
+    display: flex;
+    justify-content: flex-end;
+}
+

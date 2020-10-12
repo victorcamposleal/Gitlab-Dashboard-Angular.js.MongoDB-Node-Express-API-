@@ -1,0 +1,23 @@
+<div *ngIf="totalIssues" class="first-container">
+    <div class="title-container">
+        <h1 class="main-title">Issues</h1>
+    </div>
+    <div class="stats">
+        <div class="text">
+            <div class="data-titles">
+            <h2>Issues totales creados</h2>
+            <h3>(teniendo en cuenta los últimos 10 proyectos modificados)</h3>
+            </div>
+            <div class="data">
+                <h2>Total de issues: {{totalIssues.totalIssues}}</h2>
+                <h2>Issues que actualmente se encuentran abiertos: <span class="open">{{totalIssues.issuesOpened}}</span></h2>            
+                <h2>Issues que han sido cerrados: <span class="closed">{{totalIssues.issuesClosed}}</span></h2>
+                <h2>Ratio de cierre: {{totalIssues.closingRatio}}</h2>
+            </div>            
+        </div>
+        <div class="pie-container">
+            <h2>Proporción issues abiertos-cerrados</h2>
+            <chart [type]="chart.type" [data]="chart.data" [options]="chart.options" class="chart"></chart>
+        </div>
+    </div>
+</div>

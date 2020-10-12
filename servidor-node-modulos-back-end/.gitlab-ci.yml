@@ -1,0 +1,59 @@
+variables:
+  REGISTRY_HOST: hub.irontec.com
+
+stages:
+  - quality
+  - build
+  - test
+  - deploy
+
+quality:
+  tags:
+    - docker
+    - runners
+  stage: quality
+  image: $REGISTRY_HOST/internet/dockerfiles/sonar-scanner/3.2:latest
+  script:
+    - sonar-scanner -Dsonar.analysis.mode=publish
+  allow_failure: true
+
+build:
+  tags:
+    - docker
+    - runners
+  stage: build
+  only:
+    - tags
+  script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $REGISTRY_HOST
+  - docker build -t $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_TAG -t $REGISTRY_HOST/$CI_PROJECT_PATH:latest --file Dockerfile .
+  - docker push $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_TAG
+  - docker push $REGISTRY_HOST/$CI_PROJECT_PATH:latest
+
+test:
+  tags:
+    - docker
+    - runners
+  stage: test
+  only:
+    - tags
+  script:
+    - echo "TODO Run tests"
+
+deploy_staging:
+  stage: deploy
+  tags:
+    - BigCloudStage
+  only:
+    - tags
+  script:
+   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $REGISTRY_HOST
+   - docker service update --with-registry-auth --image $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_TAG bbkbootcamp_server
+   - if [[ $(docker service inspect bbkbootcamp_server --format "{{.UpdateStatus.State}}") = "rollback_completed" ]]; then exit 1; fi
+   - docker pull $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_TAG
+   - docker tag  $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_TAG $REGISTRY_HOST/$CI_PROJECT_PATH:stage
+   - docker push $REGISTRY_HOST/$CI_PROJECT_PATH:stage
+   - docker rmi  $REGISTRY_HOST/$CI_PROJECT_PATH:stage $REGISTRY_HOST/$CI_PROJECT_PATH:$CI_COMMIT_TAG
+  environment:
+    name: staging
+    url: https://ws.retobbk.irontec.dev

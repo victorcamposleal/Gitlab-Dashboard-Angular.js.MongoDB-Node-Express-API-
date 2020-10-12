@@ -1,0 +1,20 @@
+<div *ngIf="commitsLastWeek" class="first-container">
+    <div class="title-container">
+        <h1 class="main-title">Proyectos</h1>
+    </div>
+    <div class="data-container">
+        <div class="text">
+            <div class="data-titles">
+                <h2>Proyectos con más commits en la ultima semana </h2>
+                <h3>(teniendo en cuenta los últimos 10 proyectos modificados)</h3>
+            </div>
+            <div class="data">
+                <h2 *ngFor="let values of commitsLastWeek, index as i">{{values.name}}: <span
+                        class="data{{i}}">{{values.commits}}</span></h2>
+            </div>
+        </div>
+        <div class="chart-container">
+            <chart [type]="chart.type" [data]="chart.data" [options]="chart.options" class="chart"></chart>
+        </div>
+    </div>
+</div>
